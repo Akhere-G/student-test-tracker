@@ -11,6 +11,7 @@ export const Table = styled.table`
 
   & thead {
     background-color: #48f;
+    font-size: 1.4rem;
   }
 
   & th,
