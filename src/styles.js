@@ -2,13 +2,16 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   min-height: 100vh;
-`;
-
-export const Wrapper = styled.div`
-  padding: 1rem;
   width: 100%;
   margin: 0 auto;
   max-width: 900px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 
