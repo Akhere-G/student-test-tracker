@@ -22,13 +22,7 @@ export const Table = styled.table`
 `;
 
 export const Button = styled.button`
-  padding: 0.3rem;
-  border: 1px solid black;
-  border-radius: 3px;
-  background-color: white;
   &:hover {
-    cursor: pointer;
     background-color: #fcc;
   }
-  transition: ease-in-out 300ms;
 `;

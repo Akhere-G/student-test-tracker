@@ -26,6 +26,10 @@ const AddRecordForm = () => {
         <input type="radio" id="C" name="class" value="C" />
         <Label for="C">C</Label>
       </RadioGroup>
+
+      <FormGroup>
+        <button>Create Record</button>
+      </FormGroup>
     </Container>
   );
 };

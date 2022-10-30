@@ -8,7 +8,7 @@ const Record = ({ studentName, score, studentClass }) => {
       <td>{score}</td>
       <td>{studentClass}</td>
       <td>
-        <Button>delete</Button>
+        <Button>Delete</Button>
       </td>
     </tr>
   );
