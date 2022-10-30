@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  padding: 1rem;
+  margin: 1rem;
   flex: 1;
-  margin-top: 1rem;
   background: white;
+  margin-bottom: 0;
 `;
 
 export const FormGroup = styled.span`
