@@ -18,11 +18,21 @@ export const Table = styled.table`
     font-size: 1.4rem;
   }
 
-  & th,
-  td {
+  & td {
     padding: 0.5rem;
     border-bottom: #eee 0.4rem solid;
     background-color: white;
+  }
+`;
+
+export const Th = styled.th`
+  padding: 0.5rem;
+  border-bottom: #eee 0.4rem solid;
+  background-color: ${({ focusOn }) => (focusOn ? "#ddd" : "white")};
+  transition: ease-in 150ms;
+  &:hover {
+    cursor: ${({ dummy }) => (dummy ? "initial" : "pointer")};
+    background-color: ${({ dummy }) => (dummy ? "white" : "#ccc")};
   }
 `;
 

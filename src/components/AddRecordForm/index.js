@@ -15,27 +15,27 @@ const initialFormData = {
   studentClass: "A",
 };
 
+const validateFormData = (formData) => {
+  const { studentName, score } = formData;
+
+  if (!studentName.trim()) {
+    return "Student name is missing";
+  }
+
+  if (!score.trim()) {
+    return "Score is missing";
+  }
+
+  if (isNaN(score)) {
+    return "Score is not a number";
+  }
+
+  return "";
+};
+
 const AddRecordForm = ({ addRecord }) => {
   const [formData, setFormData] = useState(initialFormData);
   const [errorMessage, setErrorMessage] = useState("");
-
-  const validateFormData = (formData) => {
-    const { studentName, score } = formData;
-
-    if (!studentName.trim()) {
-      return "Student name is missing";
-    }
-
-    if (!score.trim()) {
-      return "Score is missing";
-    }
-
-    if (isNaN(score)) {
-      return "Score is not a number";
-    }
-
-    return "";
-  };
 
   const handleClick = (e) => {
     e.preventDefault();

@@ -25,6 +25,7 @@ const App = () => {
   const [records, setRecords] = useState(initialRecords);
   const [filteredRecords, setFilteredRecords] = useState(initialRecords);
   const [filters, setFilters] = useState(initialFilters);
+  const [sorting, setSorting] = useState({ sortBy: "studentName", asc: false });
 
   useEffect(() => {
     const newFilteredRecords = records.filter((record) => {
@@ -42,8 +43,32 @@ const App = () => {
       return true;
     });
 
-    setFilteredRecords(newFilteredRecords);
-  }, [filters]);
+    let sortedRecords;
+
+    if (sorting.sortBy === "studentName" && sorting.asc) {
+      sortedRecords = newFilteredRecords.sort((a, b) =>
+        a.studentName.localeCompare(b.studentName)
+      );
+    } else if (sorting.sortBy === "studentName" && !sorting.asc) {
+      sortedRecords = newFilteredRecords.sort((a, b) =>
+        b.studentName.localeCompare(a.studentName)
+      );
+    } else if (sorting.sortBy === "score" && sorting.asc) {
+      sortedRecords = newFilteredRecords.sort((a, b) => a.score - b.score);
+    } else if (sorting.sortBy === "score" && !sorting.asc) {
+      sortedRecords = newFilteredRecords.sort((a, b) => b.score - a.score);
+    } else if (sorting.sortBy === "studentClass" && sorting.asc) {
+      sortedRecords = newFilteredRecords.sort((a, b) =>
+        a.studentClass.localeCompare(b.studentClass)
+      );
+    } else if (sorting.sortBy === "studentClass" && !sorting.asc) {
+      sortedRecords = newFilteredRecords.sort((a, b) =>
+        b.studentClass.localeCompare(a.studentClass)
+      );
+    }
+
+    setFilteredRecords(sortedRecords);
+  }, [filters, sorting]);
 
   const addRecord = (record) => {
     setRecords((prev) => [...prev, record]);
@@ -62,7 +87,12 @@ const App = () => {
             <AddRecordForm addRecord={addRecord} />
             <FormFilter filters={filters} setFilters={setFilters} />
           </FormWrapper>
-          <Records records={filteredRecords} deleteRecord={deleteRecord} />
+          <Records
+            records={filteredRecords}
+            deleteRecord={deleteRecord}
+            setSorting={setSorting}
+            sorting={sorting}
+          />
         </Wrapper>
       </Container>
     </>
