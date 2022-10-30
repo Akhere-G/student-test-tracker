@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Container = styled.form`
   margin: 1rem;
-  flex: 1;
   background: white;
   margin-bottom: 0;
   padding-bottom: 1rem;

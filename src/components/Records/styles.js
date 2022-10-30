@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   margin: 1rem;
+  flex: 1;
 
   @media (min-width: 600px) {
     margin-left: 0;
