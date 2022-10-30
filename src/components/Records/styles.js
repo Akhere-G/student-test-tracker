@@ -30,3 +30,14 @@ export const Button = styled.button`
     background-color: #fcc;
   }
 `;
+
+export const NoRecords = styled.tr`
+  background: white;
+  width: 100%;
+
+  & td {
+    padding: 5rem 1rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+`;

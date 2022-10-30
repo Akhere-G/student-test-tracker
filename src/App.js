@@ -19,6 +19,10 @@ const App = () => {
     setRecords((prev) => [...prev, record]);
   };
 
+  const deleteRecord = (id) => {
+    setRecords((prev) => prev.filter((record) => id !== record.id));
+  };
+
   return (
     <Container>
       <h1>Student Records</h1>
@@ -27,7 +31,7 @@ const App = () => {
           <AddRecordForm addRecord={addRecord} />
           <FormFilter />
         </FormWrapper>
-        <Records records={records} />
+        <Records records={records} deleteRecord={deleteRecord} />
       </Wrapper>
     </Container>
   );

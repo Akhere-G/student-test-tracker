@@ -1,8 +1,23 @@
 import React from "react";
-import { Container, Table } from "./styles";
+import { Container, Table, NoRecords } from "./styles";
 import Record from "./Record";
 
-const Records = ({ records }) => {
+const Records = ({ records, deleteRecord }) => {
+  let RecordList;
+
+  if (records.length === 0) {
+    RecordList = (
+      <NoRecords>
+        <td colSpan={4}>
+          <h2>No Records</h2>
+        </td>
+      </NoRecords>
+    );
+  } else {
+    RecordList = records.map((record) => (
+      <Record key={record.id} {...record} deleteRecord={deleteRecord} />
+    ));
+  }
   return (
     <Container>
       <Table>
@@ -14,11 +29,7 @@ const Records = ({ records }) => {
             <th></th>
           </tr>
         </thead>
-        <tbody>
-          {records.map((record) => (
-            <Record key={record.id} {...record} />
-          ))}
-        </tbody>
+        <tbody>{RecordList}</tbody>
       </Table>
     </Container>
   );
