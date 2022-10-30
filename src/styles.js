@@ -9,8 +9,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 1px 2px 3px #0008;
-  background: #def;
+  background: #eee;
 `;
 
 export const Wrapper = styled.div`

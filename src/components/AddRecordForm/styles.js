@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Container = styled.div`
   padding: 1rem;
   flex: 1;
-  box-shadow: 1px 2px 3px #0008;
   margin-top: 1rem;
   background: white;
 `;
