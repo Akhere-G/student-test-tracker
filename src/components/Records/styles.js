@@ -22,3 +22,15 @@ export const Table = styled.table`
     background-color: #48f;
   }
 `;
+
+export const Button = styled.button`
+  border: none;
+  padding: 0.3rem;
+  border-radius: 3px;
+  background-color: white;
+  &:hover {
+    cursor: pointer;
+    background-color: #fcc;
+  }
+  transition: ease-in-out 300ms;
+`;

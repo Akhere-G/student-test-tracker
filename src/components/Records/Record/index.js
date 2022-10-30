@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "../styles";
 
 const Record = ({ studentName, score, studentClass }) => {
   return (
@@ -7,7 +8,7 @@ const Record = ({ studentName, score, studentClass }) => {
       <td>{score}</td>
       <td>{studentClass}</td>
       <td>
-        <button>delete</button>
+        <Button>delete</Button>
       </td>
     </tr>
   );
