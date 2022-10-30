@@ -9,7 +9,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #eee;
 `;
 
 export const Wrapper = styled.div`
@@ -27,4 +26,11 @@ export const Wrapper = styled.div`
 export const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+export const Title = styled.h1`
+  background-color: #48f;
+  color: white;
+  width: 100%;
+  text-align: center;
 `;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AddRecordForm, FormFilter, Records } from "./components";
 
-import { Container, Wrapper, FormWrapper } from "./styles";
+import { Container, Wrapper, FormWrapper, Title } from "./styles";
 
 const initialRecords = [
   { id: 1, studentName: "Alan", score: 100, studentClass: "A" },
@@ -49,16 +49,18 @@ const App = () => {
   });
 
   return (
-    <Container>
-      <h1>Student Records</h1>
-      <Wrapper>
-        <FormWrapper>
-          <AddRecordForm addRecord={addRecord} />
-          <FormFilter filters={filters} setFilters={setFilters} />
-        </FormWrapper>
-        <Records records={filteredRecords} deleteRecord={deleteRecord} />
-      </Wrapper>
-    </Container>
+    <>
+      <Title>Student Records</Title>
+      <Container>
+        <Wrapper>
+          <FormWrapper>
+            <AddRecordForm addRecord={addRecord} />
+            <FormFilter filters={filters} setFilters={setFilters} />
+          </FormWrapper>
+          <Records records={filteredRecords} deleteRecord={deleteRecord} />
+        </Wrapper>
+      </Container>
+    </>
   );
 };
 

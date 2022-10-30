@@ -5,10 +5,11 @@ export const Container = styled.form`
   flex: 1;
   background: white;
   margin-bottom: 0;
+  padding-bottom: 1rem;
 `;
 
 export const FormGroup = styled.span`
-  padding: 1rem;
+  padding: 1rem 1rem 0rem 1rem;
   display: flex;
 
   @media (min-width: 600px) {
@@ -17,7 +18,8 @@ export const FormGroup = styled.span`
 `;
 
 export const RadioGroup = styled.span`
-  padding: 1rem;
+  padding: 1rem 1rem 0rem 1rem;
+
   display: flex;
 
   @media (min-width: 600px) {
