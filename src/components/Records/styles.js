@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   margin: 1rem;
-  background-color: white;
 
   @media (min-width: 600px) {
     margin-left: 0;
@@ -22,6 +21,7 @@ export const Table = styled.table`
   td {
     padding: 0.5rem;
     border-bottom: #eee 0.4rem solid;
+    background-color: white;
   }
 `;
 

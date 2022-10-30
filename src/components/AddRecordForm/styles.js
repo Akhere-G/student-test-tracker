@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.form`
   margin: 1rem;
   flex: 1;
   background: white;
@@ -33,4 +33,10 @@ export const Label = styled.label`
   @media (min-width: 600px) {
     padding-bottom: 0.5rem;
   }
+`;
+
+export const ErrorMessage = styled.p`
+  padding-left: 1rem;
+  padding-top: 1rem;
+  color: #c00;
 `;
