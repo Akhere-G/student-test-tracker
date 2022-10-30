@@ -9,11 +9,14 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 1px 2px 3px #0008;
 `;
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
 
   @media (min-width: 600px) {
     justify-content: center;
