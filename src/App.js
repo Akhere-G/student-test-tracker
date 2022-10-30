@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AddRecordForm, FormFilter, Records } from "./components";
 
 import { Container, Wrapper, FormWrapper, Title } from "./styles";
@@ -23,7 +23,27 @@ const initialFilters = {
 
 const App = () => {
   const [records, setRecords] = useState(initialRecords);
+  const [filteredRecords, setFilteredRecords] = useState(initialRecords);
   const [filters, setFilters] = useState(initialFilters);
+
+  useEffect(() => {
+    const newFilteredRecords = records.filter((record) => {
+      const { from, to, studentClass } = filters;
+      if (record.score < from) {
+        return false;
+      }
+      if (record.score > to) {
+        return false;
+      }
+      if (!studentClass[record.studentClass]) {
+        return false;
+      }
+
+      return true;
+    });
+
+    setFilteredRecords(newFilteredRecords);
+  }, [filters]);
 
   const addRecord = (record) => {
     setRecords((prev) => [...prev, record]);
@@ -32,21 +52,6 @@ const App = () => {
   const deleteRecord = (id) => {
     setRecords((prev) => prev.filter((record) => id !== record.id));
   };
-
-  const filteredRecords = records.filter((record) => {
-    const { from, to, studentClass } = filters;
-    if (record.score < from) {
-      return false;
-    }
-    if (record.score > to) {
-      return false;
-    }
-    if (!studentClass[record.studentClass]) {
-      return false;
-    }
-
-    return true;
-  });
 
   return (
     <>
