@@ -10,10 +10,20 @@ const initialRecords = [
   { id: 4, studentName: "Ade", score: 80, studentClass: "B" },
   { id: 5, studentName: "Tariq", score: 60, studentClass: "C" },
   { id: 6, studentName: "Shaun", score: 100, studentClass: "C" },
+  { id: 7, studentName: "Michaela", score: 10, studentClass: "C" },
+  { id: 8, studentName: "Robin", score: 20, studentClass: "B" },
+  { id: 9, studentName: "John", score: 30, studentClass: "A" },
 ];
+
+const initialFilters = {
+  from: "0",
+  to: "100",
+  studentClass: { A: true, B: true, C: true },
+};
 
 const App = () => {
   const [records, setRecords] = useState(initialRecords);
+  const [filters, setFilters] = useState(initialFilters);
 
   const addRecord = (record) => {
     setRecords((prev) => [...prev, record]);
@@ -23,15 +33,30 @@ const App = () => {
     setRecords((prev) => prev.filter((record) => id !== record.id));
   };
 
+  const filteredRecords = records.filter((record) => {
+    const { from, to, studentClass } = filters;
+    if (record.score < from) {
+      return false;
+    }
+    if (record.score > to) {
+      return false;
+    }
+    if (!studentClass[record.studentClass]) {
+      return false;
+    }
+
+    return true;
+  });
+
   return (
     <Container>
       <h1>Student Records</h1>
       <Wrapper>
         <FormWrapper>
           <AddRecordForm addRecord={addRecord} />
-          <FormFilter />
+          <FormFilter filters={filters} setFilters={setFilters} />
         </FormWrapper>
-        <Records records={records} deleteRecord={deleteRecord} />
+        <Records records={filteredRecords} deleteRecord={deleteRecord} />
       </Wrapper>
     </Container>
   );
