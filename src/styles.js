@@ -10,6 +10,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   box-shadow: 1px 2px 3px #0008;
+  background: #def;
 `;
 
 export const Wrapper = styled.div`
