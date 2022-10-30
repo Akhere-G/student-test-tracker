@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  padding: 1rem;
+  margin: 1rem;
+  background-color: white;
+  box-shadow: 1px 2px 3px #0008;
 `;
 
 export const Table = styled.table`
@@ -10,7 +12,7 @@ export const Table = styled.table`
   border-collapse: collapse;
 
   & thead {
-    background-color: #48f;
+    background-color: #8cf;
     font-size: 1.4rem;
   }
 
@@ -20,13 +22,13 @@ export const Table = styled.table`
   }
 
   & tr:nth-child(2n) {
-    background-color: #48f;
+    background-color: #8cf;
   }
 `;
 
 export const Button = styled.button`
-  border: none;
   padding: 0.3rem;
+  border: 1px solid black;
   border-radius: 3px;
   background-color: white;
   &:hover {
