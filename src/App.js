@@ -1,5 +1,13 @@
+import { AddRecordForm, FormFilter, Records } from "./components";
+
 function App() {
-  return <div>App</div>;
+  return (
+    <div>
+      <AddRecordForm />
+      <FormFilter />
+      <Records />
+    </div>
+  );
 }
 
 export default App;
