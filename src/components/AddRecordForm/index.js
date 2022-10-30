@@ -1,7 +1,9 @@
+import { Container } from "./styles";
+
 import React from "react";
 
 const AddRecordForm = () => {
-  return <div>AddRecordForm</div>;
+  return <Container>AddRecordForm</Container>;
 };
 
 export default AddRecordForm;

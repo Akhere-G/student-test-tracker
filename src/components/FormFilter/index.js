@@ -1,7 +1,8 @@
 import React from "react";
+import { Container } from "./styles";
 
 const FormFilter = () => {
-  return <div>FormFilter</div>;
+  return <Container>FormFilter</Container>;
 };
 
 export default FormFilter;

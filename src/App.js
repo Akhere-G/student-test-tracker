@@ -1,13 +1,19 @@
 import { AddRecordForm, FormFilter, Records } from "./components";
 
-function App() {
+import { Container, Wrapper, FormWrapper } from "./styles";
+
+const App = () => {
   return (
-    <div>
-      <AddRecordForm />
-      <FormFilter />
-      <Records />
-    </div>
+    <Container>
+      <Wrapper>
+        <FormWrapper>
+          <AddRecordForm />
+          <FormFilter />
+        </FormWrapper>
+        <Records />
+      </Wrapper>
+    </Container>
   );
-}
+};
 
 export default App;

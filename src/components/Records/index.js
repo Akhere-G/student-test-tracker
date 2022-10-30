@@ -1,7 +1,8 @@
 import React from "react";
+import { Container } from "./styles";
 
 const Records = () => {
-  return <div>Records</div>;
+  return <Container>Records</Container>;
 };
 
 export default Records;
