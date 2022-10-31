@@ -57,7 +57,7 @@ const AddRecordForm = ({ addRecord }) => {
     <Container>
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       <FormGroup>
-        <Label for="studentName">Student name</Label>
+        <Label htmlFor="studentName">Student name</Label>
         <input
           id="studentName"
           type="text"
@@ -69,7 +69,7 @@ const AddRecordForm = ({ addRecord }) => {
       </FormGroup>
 
       <FormGroup>
-        <Label for="score">Score</Label>
+        <Label htmlFor="score">Score</Label>
         <input
           id="score"
           type="text"
@@ -91,7 +91,7 @@ const AddRecordForm = ({ addRecord }) => {
             setFormData((prev) => ({ ...prev, studentClass: e.target.value }))
           }
         />
-        <Label for="A">A</Label>
+        <Label htmlFor="A">A</Label>
 
         <input
           type="radio"
@@ -102,7 +102,7 @@ const AddRecordForm = ({ addRecord }) => {
             setFormData((prev) => ({ ...prev, studentClass: e.target.value }))
           }
         />
-        <Label for="B">B</Label>
+        <Label htmlFor="B">B</Label>
 
         <input
           type="radio"
@@ -113,7 +113,7 @@ const AddRecordForm = ({ addRecord }) => {
             setFormData((prev) => ({ ...prev, studentClass: e.target.value }))
           }
         />
-        <Label for="C">C</Label>
+        <Label htmlFor="C">C</Label>
       </RadioGroup>
 
       <FormGroup>

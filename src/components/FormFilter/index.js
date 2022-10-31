@@ -7,7 +7,7 @@ const FormFilter = ({ filters, setFilters }) => {
       <RangeGroup>
         <Label>Score</Label>
         <Range>
-          <Label for="from">From</Label>
+          <Label htmlFor="from">From</Label>
           <input
             id="from"
             type="number"
@@ -16,7 +16,7 @@ const FormFilter = ({ filters, setFilters }) => {
               setFilters((prev) => ({ ...prev, from: e.target.value }))
             }
           />
-          <Label for="to">to</Label>
+          <Label htmlFor="to">to</Label>
           <input
             id="to"
             type="number"
@@ -41,7 +41,7 @@ const FormFilter = ({ filters, setFilters }) => {
             }))
           }
         />
-        <Label for="filterA">A</Label>
+        <Label htmlFor="filterA">A</Label>
 
         <input
           type="checkBox"
@@ -55,7 +55,7 @@ const FormFilter = ({ filters, setFilters }) => {
             }))
           }
         />
-        <Label for="filterB">B</Label>
+        <Label htmlFor="filterB">B</Label>
 
         <input
           type="checkBox"
@@ -69,7 +69,7 @@ const FormFilter = ({ filters, setFilters }) => {
             }))
           }
         />
-        <Label for="filterC">C</Label>
+        <Label htmlFor="filterC">C</Label>
       </CheckboxGroup>
     </Container>
   );

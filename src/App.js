@@ -1,19 +1,9 @@
 import { useState, useEffect } from "react";
-import { AddRecordForm, FormFilter, Records } from "./components";
+import { AddRecordForm, FormFilter, Records, Pagination } from "./components";
 
 import { Container, Wrapper, FormWrapper, Title } from "./styles";
 
-const initialRecords = [
-  { id: 1, studentName: "Alan", score: 100, studentClass: "A" },
-  { id: 2, studentName: "Jessica", score: 50, studentClass: "A" },
-  { id: 3, studentName: "Sarah", score: 70, studentClass: "B" },
-  { id: 4, studentName: "Ade", score: 80, studentClass: "B" },
-  { id: 5, studentName: "Tariq", score: 60, studentClass: "C" },
-  { id: 6, studentName: "Shaun", score: 100, studentClass: "C" },
-  { id: 7, studentName: "Michaela", score: 10, studentClass: "C" },
-  { id: 8, studentName: "Robin", score: 20, studentClass: "B" },
-  { id: 9, studentName: "John", score: 30, studentClass: "A" },
-];
+import { initialRecords } from "./data";
 
 const initialFilters = {
   from: "0",
@@ -21,11 +11,27 @@ const initialFilters = {
   studentClass: { A: true, B: true, C: true },
 };
 
+const initialPaging = { pageNumber: 1, totalPages: 1, recordsPerPage: 6 };
+
 const App = () => {
   const [records, setRecords] = useState(initialRecords);
   const [filteredRecords, setFilteredRecords] = useState(initialRecords);
   const [filters, setFilters] = useState(initialFilters);
   const [sorting, setSorting] = useState({ sortBy: "studentName", asc: false });
+  const [paging, setPaging] = useState(initialPaging);
+
+  useEffect(() => {
+    const { recordsPerPage } = paging;
+
+    const numberOfRecords = filteredRecords.length;
+
+    if (numberOfRecords === 0) {
+      setPaging(initialPaging);
+    }
+    const totalPages = Math.ceil(numberOfRecords / recordsPerPage);
+
+    setPaging((prev) => ({ ...prev, totalPages, pageNumber: 1 }));
+  }, [filteredRecords]);
 
   useEffect(() => {
     const newFilteredRecords = records.filter((record) => {
@@ -78,12 +84,21 @@ const App = () => {
     setRecords((prev) => prev.filter((record) => id !== record.id));
   };
 
+  const setPageNumber = (i) =>
+    setPaging((prev) => ({
+      ...prev,
+      pageNumber: Math.min(Math.max(i, 1), prev.totalPages),
+    }));
+  //  ensures i is greater than 1 or smaller than totalPages or equal to either
+
   return (
     <>
       <Title>Student Records</Title>
+      <pre>{JSON.stringify(paging, null, 2)}</pre>
       <Container>
         <Wrapper>
           <FormWrapper>
+            <Pagination paging={paging} setPageNumber={setPageNumber} />
             <AddRecordForm addRecord={addRecord} />
             <FormFilter filters={filters} setFilters={setFilters} />
           </FormWrapper>
