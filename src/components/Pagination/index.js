@@ -93,14 +93,16 @@ const Pagination = ({ paging, setPageNumber, setRecordsPerPage }) => {
         </RightButton>
       </ButtonContainer>
       <FormContainer>
-        <label>Page</label>
+        <label htmlFor="pageNumber">Page</label>
         <input
+          id="pageNumber"
           type="number"
           value={pageNumber}
           onChange={(e) => setPageNumber(e.target.value)}
         />
-        <label>records per page</label>
+        <label htmlFor="recordsPerPage">records per page</label>
         <input
+          id="recordsPerPage"
           type="number"
           value={recordsPerPage}
           onChange={(e) => setRecordsPerPage(e.target.value)}
