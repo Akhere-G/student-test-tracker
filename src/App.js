@@ -118,7 +118,7 @@ const App = () => {
     setPaging((prev) => {
       let newPageNumber = i;
       if (i !== "") {
-        newPageNumber = Math.min(Math.max(i, 0), prev.totalPages);
+        newPageNumber = Math.min(Math.max(i, 1), prev.totalPages);
       }
 
       return {
