@@ -25,7 +25,13 @@ const getNewPaging = (records, previousPaging = initialPaging) => {
   if (numberOfRecords === 0) {
     return initialPaging;
   }
-  const totalPages = Math.ceil(numberOfRecords / recordsPerPage);
+
+  let totalPages;
+  if (recordsPerPage === "") {
+    totalPages = 1;
+  } else {
+    totalPages = Math.ceil(numberOfRecords / recordsPerPage);
+  }
 
   return { ...previousPaging, totalPages };
 };
@@ -109,19 +115,43 @@ const App = () => {
   };
 
   const setPageNumber = (i) =>
-    setPaging((prev) => ({
-      ...prev,
-      pageNumber: Math.min(Math.max(i, 1), prev.totalPages),
-    }));
+    setPaging((prev) => {
+      let newPageNumber = i;
+      if (i !== "") {
+        newPageNumber = Math.min(Math.max(i, 0), prev.totalPages);
+      }
+
+      return {
+        ...prev,
+        pageNumber: newPageNumber,
+      };
+    });
   //  ensures i is greater than 1 or smaller than totalPages or equal to either
 
+  const setRecordsPerPage = (i) => {
+    setPaging((prev) => {
+      let newRecordPerPage = i;
+
+      if (newRecordPerPage !== "") {
+        newRecordPerPage = Math.max(i, 1);
+      }
+      return getNewPaging(filteredRecords, {
+        ...prev,
+        recordsPerPage: newRecordPerPage,
+      });
+    });
+  };
   return (
     <>
       <Title>Student Records</Title>
       <Container>
         <Wrapper>
           <FormWrapper>
-            <Pagination paging={paging} setPageNumber={setPageNumber} />
+            <Pagination
+              paging={paging}
+              setPageNumber={setPageNumber}
+              setRecordsPerPage={setRecordsPerPage}
+            />
             <AddRecordForm addRecord={addRecord} />
             <FormFilter filters={filters} setFilters={setFilters} />
           </FormWrapper>

@@ -1,8 +1,15 @@
 import React from "react";
-import { Container, LeftButton, RightButton, NumberButton } from "./styles";
+import {
+  Container,
+  ButtonContainer,
+  FormContainer,
+  LeftButton,
+  RightButton,
+  NumberButton,
+} from "./styles";
 
-const Pagination = ({ paging, setPageNumber }) => {
-  const { pageNumber, totalPages } = paging;
+const Pagination = ({ paging, setPageNumber, setRecordsPerPage }) => {
+  const { pageNumber, totalPages, recordsPerPage } = paging;
 
   let MiddleButtons = [];
 
@@ -51,7 +58,7 @@ const Pagination = ({ paging, setPageNumber }) => {
 
   if (totalPages < 5) {
     MiddleButtons = createMiddleButtons(1, totalPages + 1);
-  } else if (pageNumber === 1) {
+  } else if (pageNumber === 1 || pageNumber === "") {
     MiddleButtons = createMiddleButtons(1, 4);
     MiddleButtons.push(RightEllipsis);
     MiddleButtons.push(LastPage);
@@ -75,14 +82,30 @@ const Pagination = ({ paging, setPageNumber }) => {
   const atEnd = pageNumber === totalPages;
   return (
     <Container>
-      <LeftButton isDisabled={atStart} onClick={handleClick(pageNumber - 1)}>
-        ←
-      </LeftButton>
-      {MiddleButtons}
+      <ButtonContainer>
+        <LeftButton isDisabled={atStart} onClick={handleClick(pageNumber - 1)}>
+          ←
+        </LeftButton>
+        {MiddleButtons}
 
-      <RightButton isDisabled={atEnd} onClick={handleClick(pageNumber + 1)}>
-        →
-      </RightButton>
+        <RightButton isDisabled={atEnd} onClick={handleClick(pageNumber + 1)}>
+          →
+        </RightButton>
+      </ButtonContainer>
+      <FormContainer>
+        <label>Page</label>
+        <input
+          type="number"
+          value={pageNumber}
+          onChange={(e) => setPageNumber(e.target.value)}
+        />
+        <label>records per page</label>
+        <input
+          type="number"
+          value={recordsPerPage}
+          onChange={(e) => setRecordsPerPage(e.target.value)}
+        />
+      </FormContainer>
     </Container>
   );
 };
