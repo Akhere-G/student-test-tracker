@@ -8,8 +8,6 @@ export const initialRecords = [
   { id: 7, studentName: "Michaela", score: 10, studentClass: "C" },
   { id: 8, studentName: "Robin", score: 20, studentClass: "B" },
   { id: 9, studentName: "John", score: 30, studentClass: "A" },
-];
-/*
   { id: 10, studentName: "Peter", score: 95, studentClass: "A" },
   { id: 11, studentName: "Oscar", score: 85, studentClass: "A" },
   { id: 12, studentName: "Jenny", score: 55, studentClass: "A" },
@@ -30,4 +28,3 @@ export const initialRecords = [
   { id: 27, studentName: "Olivia", score: 20, studentClass: "B" },
   { id: 28, studentName: "Ak", score: 100, studentClass: "A" },
 ];
-*/

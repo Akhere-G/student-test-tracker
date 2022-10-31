@@ -12,7 +12,7 @@ const initialFilters = {
 };
 
 const initialPaging = {
-  recordsPerPage: 3,
+  recordsPerPage: 6,
   pageNumber: 1,
   totalPages: 1,
 };

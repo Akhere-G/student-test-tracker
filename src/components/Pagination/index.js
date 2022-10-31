@@ -26,41 +26,48 @@ const Pagination = ({ paging, setPageNumber }) => {
     return MiddleButtons;
   };
 
-  const RightEllipsis = (
-    <NumberButton key="-1" dummy>
-      ...
-    </NumberButton>
-  );
-
   const LeftEllipsis = (
     <NumberButton key="-2" dummy>
       ...
     </NumberButton>
   );
 
+  const RightEllipsis = (
+    <NumberButton key="-1" dummy>
+      ...
+    </NumberButton>
+  );
+
+  const FirstPage = (
+    <NumberButton key={1} onClick={handleClick(1)}>
+      1
+    </NumberButton>
+  );
+  const LastPage = (
+    <NumberButton key={totalPages} onClick={handleClick(totalPages)}>
+      {totalPages}
+    </NumberButton>
+  );
+
   if (totalPages < 5) {
     MiddleButtons = createMiddleButtons(1, totalPages + 1);
   } else if (pageNumber === 1) {
-    MiddleButtons = createMiddleButtons(1, 5);
+    MiddleButtons = createMiddleButtons(1, 4);
     MiddleButtons.push(RightEllipsis);
+    MiddleButtons.push(LastPage);
   } else if (pageNumber === totalPages) {
-    MiddleButtons = createMiddleButtons(pageNumber - 3, pageNumber + 1);
+    MiddleButtons = createMiddleButtons(pageNumber - 2, pageNumber + 1);
     MiddleButtons.unshift(LeftEllipsis);
+    MiddleButtons.unshift(FirstPage);
   } else {
     MiddleButtons = [
-      <NumberButton key={1} onClick={handleClick(1)}>
-        1
-      </NumberButton>,
+      FirstPage,
       LeftEllipsis,
-
       <NumberButton key={pageNumber} active onClick={handleClick(pageNumber)}>
         {pageNumber}
       </NumberButton>,
       RightEllipsis,
-
-      <NumberButton key={totalPages} onClick={handleClick(totalPages)}>
-        {totalPages}
-      </NumberButton>,
+      LastPage,
     ];
   }
 
