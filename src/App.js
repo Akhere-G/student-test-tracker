@@ -42,17 +42,17 @@ const App = () => {
   const [sortedRecords, setSortedRecords] = useState([]);
   const [recordsOnCurrentPage, setRecordsOnCurrentPage] = useState([]);
   const [filters, setFilters] = useState(initialFilters);
-  const [sorting, setSorting] = useState({ sortBy: "studentName", asc: false });
+  const [sorting, setSorting] = useState({ sortBy: "studentName", asc: true });
   const [paging, setPaging] = useState(getNewPaging(sortedRecords));
 
   useEffect(() => {
+    const { from, to, studentClass } = filters;
     const newFilteredRecords = records.filter((record) => {
-      const { from, to, studentClass } = filters;
-      return (
-        record.score >= from &&
-        record.score <= to &&
-        studentClass[record.studentClass]
-      );
+      const keep =
+        Number(record.score) >= from &&
+        Number(record.score) <= to &&
+        studentClass[record.studentClass];
+      return keep;
     });
 
     setFilteredRecords(newFilteredRecords);
