@@ -91,9 +91,7 @@ const App = () => {
   }, [filteredRecords, sorting]);
 
   useEffect(() => {
-    const a = getNewPaging(sortedRecords, paging);
-
-    const { pageNumber, recordsPerPage } = a;
+    const { pageNumber, recordsPerPage } = getNewPaging(sortedRecords, paging);
 
     const firstPageIndex = (pageNumber - 1) * recordsPerPage;
     const lastPageIndex = firstPageIndex + recordsPerPage - 1;
