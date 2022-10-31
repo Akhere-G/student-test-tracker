@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, RangeGroup, Range, CheckboxGroup, Label } from "./styles";
 
 const FormFilter = ({ filters, setFilters }) => {

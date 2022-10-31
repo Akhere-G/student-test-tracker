@@ -11,70 +11,94 @@ const initialFilters = {
   studentClass: { A: true, B: true, C: true },
 };
 
-const initialPaging = { pageNumber: 1, totalPages: 1, recordsPerPage: 6 };
+const initialPaging = {
+  recordsPerPage: 3,
+  pageNumber: 1,
+  totalPages: 1,
+};
+
+const getNewPaging = (records, previousPaging = initialPaging) => {
+  const { recordsPerPage } = previousPaging;
+
+  const numberOfRecords = records.length;
+
+  if (numberOfRecords === 0) {
+    return initialPaging;
+  }
+  const totalPages = Math.ceil(numberOfRecords / recordsPerPage);
+
+  return { ...previousPaging, totalPages };
+};
 
 const App = () => {
   const [records, setRecords] = useState(initialRecords);
-  const [filteredRecords, setFilteredRecords] = useState(initialRecords);
+  const [filteredRecords, setFilteredRecords] = useState([]);
+  const [sortedRecords, setSortedRecords] = useState([]);
+  const [recordsOnCurrentPage, setRecordsOnCurrentPage] = useState([]);
   const [filters, setFilters] = useState(initialFilters);
   const [sorting, setSorting] = useState({ sortBy: "studentName", asc: false });
-  const [paging, setPaging] = useState(initialPaging);
-
-  useEffect(() => {
-    const { recordsPerPage } = paging;
-
-    const numberOfRecords = filteredRecords.length;
-
-    if (numberOfRecords === 0) {
-      setPaging(initialPaging);
-    }
-    const totalPages = Math.ceil(numberOfRecords / recordsPerPage);
-
-    setPaging((prev) => ({ ...prev, totalPages, pageNumber: 1 }));
-  }, [filteredRecords]);
+  const [paging, setPaging] = useState(getNewPaging(sortedRecords));
 
   useEffect(() => {
     const newFilteredRecords = records.filter((record) => {
       const { from, to, studentClass } = filters;
-      if (record.score < from) {
-        return false;
-      }
-      if (record.score > to) {
-        return false;
-      }
-      if (!studentClass[record.studentClass]) {
-        return false;
-      }
-
-      return true;
+      return (
+        record.score >= from &&
+        record.score <= to &&
+        studentClass[record.studentClass]
+      );
     });
 
-    let sortedRecords;
+    setFilteredRecords(newFilteredRecords);
+    setPaging((prev) => getNewPaging(newFilteredRecords, prev));
+  }, [records, filters]);
 
+  useEffect(() => {
+    let newSortedRecords;
     if (sorting.sortBy === "studentName" && sorting.asc) {
-      sortedRecords = newFilteredRecords.sort((a, b) =>
-        a.studentName.localeCompare(b.studentName)
-      );
+      newSortedRecords = filteredRecords
+        .slice()
+        .sort((a, b) => a.studentName.localeCompare(b.studentName));
     } else if (sorting.sortBy === "studentName" && !sorting.asc) {
-      sortedRecords = newFilteredRecords.sort((a, b) =>
-        b.studentName.localeCompare(a.studentName)
-      );
+      newSortedRecords = filteredRecords
+        .slice()
+        .sort((a, b) => b.studentName.localeCompare(a.studentName));
     } else if (sorting.sortBy === "score" && sorting.asc) {
-      sortedRecords = newFilteredRecords.sort((a, b) => a.score - b.score);
+      newSortedRecords = filteredRecords
+        .slice()
+        .sort((a, b) => a.score - b.score);
     } else if (sorting.sortBy === "score" && !sorting.asc) {
-      sortedRecords = newFilteredRecords.sort((a, b) => b.score - a.score);
+      newSortedRecords = filteredRecords
+        .slice()
+        .sort((a, b) => b.score - a.score);
     } else if (sorting.sortBy === "studentClass" && sorting.asc) {
-      sortedRecords = newFilteredRecords.sort((a, b) =>
-        a.studentClass.localeCompare(b.studentClass)
-      );
-    } else if (sorting.sortBy === "studentClass" && !sorting.asc) {
-      sortedRecords = newFilteredRecords.sort((a, b) =>
-        b.studentClass.localeCompare(a.studentClass)
-      );
+      newSortedRecords = filteredRecords
+        .slice()
+        .sort((a, b) => a.studentClass.localeCompare(b.studentClass));
+    } else {
+      newSortedRecords = filteredRecords
+        .slice()
+        .sort((a, b) => b.studentClass.localeCompare(a.studentClass));
     }
+    setPaging((prev) => ({ ...prev, pageNumber: 1 }));
+    setSortedRecords(newSortedRecords);
+  }, [filteredRecords, sorting]);
 
-    setFilteredRecords(sortedRecords);
-  }, [filters, sorting]);
+  useEffect(() => {
+    const a = getNewPaging(sortedRecords, paging);
+
+    const { pageNumber, recordsPerPage } = a;
+
+    const firstPageIndex = (pageNumber - 1) * recordsPerPage;
+    const lastPageIndex = firstPageIndex + recordsPerPage - 1;
+
+    const newRecordsOnCurrentPage = sortedRecords.slice(
+      firstPageIndex,
+      lastPageIndex + 1
+    );
+
+    setRecordsOnCurrentPage(newRecordsOnCurrentPage);
+  }, [sortedRecords, paging]);
 
   const addRecord = (record) => {
     setRecords((prev) => [...prev, record]);
@@ -94,7 +118,6 @@ const App = () => {
   return (
     <>
       <Title>Student Records</Title>
-      <pre>{JSON.stringify(paging, null, 2)}</pre>
       <Container>
         <Wrapper>
           <FormWrapper>
@@ -103,7 +126,7 @@ const App = () => {
             <FormFilter filters={filters} setFilters={setFilters} />
           </FormWrapper>
           <Records
-            records={filteredRecords}
+            records={recordsOnCurrentPage}
             deleteRecord={deleteRecord}
             setSorting={setSorting}
             sorting={sorting}

@@ -1,13 +1,14 @@
 import React from "react";
 import { Container, LeftButton, RightButton, NumberButton } from "./styles";
-import PageNumbers from "./PageNumbers";
 
 const Pagination = ({ paging, setPageNumber }) => {
-  const { pageNumber, totalPages, recordsPerPage } = paging;
+  const { pageNumber, totalPages } = paging;
 
   let MiddleButtons = [];
 
-  const handleClick = (i) => () => setPageNumber(i);
+  const handleClick = (i) => () => {
+    setPageNumber(i);
+  };
 
   const createMiddleButtons = (start, end) => {
     const MiddleButtons = [];
@@ -38,7 +39,7 @@ const Pagination = ({ paging, setPageNumber }) => {
   );
 
   if (totalPages < 5) {
-    MiddleButtons = createMiddleButtons(1, totalPages - 1);
+    MiddleButtons = createMiddleButtons(1, totalPages + 1);
   } else if (pageNumber === 1) {
     MiddleButtons = createMiddleButtons(1, 5);
     MiddleButtons.push(RightEllipsis);
@@ -47,7 +48,7 @@ const Pagination = ({ paging, setPageNumber }) => {
     MiddleButtons.unshift(LeftEllipsis);
   } else {
     MiddleButtons = [
-      <NumberButton key={1} active onClick={handleClick(1)}>
+      <NumberButton key={1} onClick={handleClick(1)}>
         1
       </NumberButton>,
       LeftEllipsis,
